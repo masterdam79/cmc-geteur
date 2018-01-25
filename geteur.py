@@ -22,9 +22,12 @@ fiat = args.fiat
 
 coinmarketcap = Market()
 
-result = coinmarketcap.ticker(crypto, limit=3, convert=fiat)
+def getfiat( crypto, fiat ):
+   "This function returns the CMC value for the passed crypto/fiat pair"
+   result = coinmarketcap.ticker(crypto, limit=3, convert=fiat)
+   fiatresult = result[0]['price_' + fiat]
+   return fiatresult
 
-print json.dumps(result[0], indent=4, sort_keys=True)
+fiatresult = getfiat(crypto, fiat)
 
-
-print(result[0]['price_eur'])
+print(fiatresult)
